@@ -1,8 +1,7 @@
 
 package uk.ac.westminster.products_api;
 
-// A PhysicalProduct IS-A Product because it is a product
-// that can be shipped to a customer.
+// Child class that inherits from Product
 public class PhysicalProduct extends Product {
 
     private double weightKg;
@@ -20,16 +19,26 @@ public class PhysicalProduct extends Product {
         this.dimensions = dimensions;
     }
 
-    // Getter for weightKg
+    // Getters
     public double getWeightKg() {
         return weightKg;
     }
 
-    // Getter for dimensions
     public String getDimensions() {
         return dimensions;
     }
+
+    // Setters
+    public void setWeightKg(double weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
+    }
 }
+
+
 
 
 

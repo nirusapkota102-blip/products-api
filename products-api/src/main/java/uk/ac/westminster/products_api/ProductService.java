@@ -13,26 +13,53 @@ public class ProductService {
     private List<Product> products = new ArrayList<>();
     private Long nextId = 1L;
 
+    // Constructor: add sample products of both types
+    public ProductService() {
+
+        // Add a digital product
+        products.add(new DigitalProduct(
+                nextId++,
+                "Java E-book",
+                19.99,
+                50.0,
+                "https://example.com/java-ebook"
+        ));
+
+        // Add a physical product
+        products.add(new PhysicalProduct(
+                nextId++,
+                "Laptop",
+                999.99,
+                2.5,
+                "35 x 25 x 2 cm"
+        ));
+    }
+
+    // Get all products
     public List<Product> getAllProducts() {
         return products;
     }
 
+    // Add a new product
     public Product addProduct(Product product) {
         product.setId(nextId++);
         products.add(product);
         return product;
     }
 
+    // Get a product by ID
     public Optional<Product> getProductById(Long id) {
         return products.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst();
     }
 
+    // Delete a product by ID
     public void deleteProduct(Long id) {
         products.removeIf(p -> p.getId().equals(id));
     }
 
+    // Search products by name
     public List<Product> findByName(String name) {
         return products.stream()
                 .filter(p -> p.getName().contains(name))
