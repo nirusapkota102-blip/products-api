@@ -17,22 +17,28 @@ public class ProductService {
     public ProductService() {
 
         // Add a digital product
-        products.add(new DigitalProduct(
+        DigitalProduct ebook = new DigitalProduct(
                 nextId++,
                 "Java E-book",
                 19.99,
                 50.0,
                 "https://example.com/java-ebook"
-        ));
+        );
+
+        ebook.applyDiscount(0.10);
+        products.add(ebook);
 
         // Add a physical product
-        products.add(new PhysicalProduct(
+        PhysicalProduct laptop = new PhysicalProduct(
                 nextId++,
                 "Laptop",
                 999.99,
                 2.5,
                 "35 x 25 x 2 cm"
-        ));
+        );
+
+        laptop.applyDiscount(0.10);
+        products.add(laptop);
     }
 
     // Get all products
@@ -40,9 +46,15 @@ public class ProductService {
         return products;
     }
 
-    // Add a new product
+    // Add a product
     public Product addProduct(Product product) {
+
         product.setId(nextId++);
+
+        if (product instanceof Discountable d) {
+            d.applyDiscount(0.10);
+        }
+
         products.add(product);
         return product;
     }
@@ -65,7 +77,22 @@ public class ProductService {
                 .filter(p -> p.getName().contains(name))
                 .toList();
     }
+
+    // Get summaries of all products
+    public List<String> getAllSummaries() {
+
+        List<String> summaries = new ArrayList<>();
+
+        for (Product p : products) {
+            summaries.add(p.getSummary());
+        }
+
+        return summaries;
+    }
 }
+
+
+
 
 
 

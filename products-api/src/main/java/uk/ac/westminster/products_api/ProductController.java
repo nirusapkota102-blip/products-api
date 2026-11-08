@@ -1,3 +1,4 @@
+
 package uk.ac.westminster.products_api;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class ProductController {
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    // Get summaries of all products
+    @GetMapping("/products/summaries")
+    public List<String> getSummaries() {
+        return productService.getAllSummaries();
     }
 
     // Get a product by ID
@@ -54,4 +61,5 @@ public class ProductController {
         return productService.findByName(name);
     }
 }
+
 
